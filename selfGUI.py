@@ -15,9 +15,9 @@ class Self_GUI_Styles:
             "title"   : ('Candara Light', 40),
             "heading" : ('Candara Bold', 12),
             "emphasis": ('Candara', 25),
-            "subtitle": ('Candara Italic', 15),
+            "subtitle": ('Candara Italic', 10),
             "body"    : ('Candara', 12),
-            "section" : ('Candara Bold', 40)
+            "section" : ('Candara Bold', 30)
         }
 
         # Font Icons
@@ -257,7 +257,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
         left_panel = Frame(self.window, bg=self.color_bg[self.theme]['BG'])
         left_panel.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
         right_panel = Frame(self.window, bg=self.color_bg[self.theme]['BG'])
-        right_panel.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
+        right_panel.grid(row=0, column=1, padx=10, pady=0, sticky="nsew")
 
         self.left_panel, self.right_panel = left_panel, right_panel
 
@@ -341,24 +341,33 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
     def create_right_section(self, section_name):
         bg_panel = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
-        bg_panel.pack(side="top", fill="both", expand=True)
-        Label(bg_panel, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"],
-              fg=self.color_fg[self.theme]["section"]).pack(anchor="ne")
+        bg_panel.pack(side="top", fill="both", expand=True, pady=0, anchor="n")
+        Label(bg_panel, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"], anchor="ne",
+              fg=self.color_fg[self.theme]["section"]).pack(anchor="ne", pady=0)
         frame = Frame(bg_panel, bg=self.color_bg[self.theme]["others"])
         frame.place(x=0, y=self.font["section"][1], relwidth=1.0, relheight=1.0)
 
         return frame
 
-    def create_project_experience(self):
+    def create_project_experience(self, project_1: list, project_2: list, project_3: list,
+                                  project_4: list, project_5: list):
+        projects = {
+            1: (project_1[0], project_1[1], project_1[2]),
+            2: (project_2[0], project_2[1], project_2[2]),
+            3: (project_3[0], project_3[1], project_3[2]),
+            4: (project_4[0], project_4[1], project_4[2]),
+            5: (project_5[0], project_5[1], project_5[2])
+        }
         frame = self.create_right_section(section_name="PROJECT EXPERIENCES")
-        Label(frame, text="PROJECTS", font=self.font['heading'],
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
-              ).pack(padx=10, pady=(10, 0), anchor="w")
-        Label(frame, text="These are some of my projects that are responsible for the all experience I have regarding "
-                          "Python till now.", font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
-        Label(frame, text="Python, Js", font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+        i = 0
+        for _, project in projects.items():
+            Label(frame, text=project[0], font=self.font['heading'],
+                  bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
+                  ).pack(padx=10, pady=(10, 0) if i == 0 else 0, anchor="w")
+            Label(frame, text=project[1], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+                  fg=self.color_fg[self.theme]['body'],
+                  anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else (0, 5), anchor="w")
+            i += 1
 
         return frame
 
@@ -380,4 +389,10 @@ class Self_Bio_GUI(Self_Ask_GUI):
                   fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
 
         return frame
+
+    def create_skills(self):
+        frame = self.create_right_section("SKILLS")
+        frame.columnconfigure(0, weight=1)
+        frame.columnconfigure(1, weight=1)
+        for i in range(3): frame.rowconfigure(i, weight=1)
 

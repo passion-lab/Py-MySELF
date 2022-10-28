@@ -42,13 +42,20 @@ if __name__ == '__main__':
     APP.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
     APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
 
+    def skill():
+        APP.create_skills()
+
     def education():
         _mp, _hs, _bachelor, _master = RESUME.get_options("MP_EDUCATION"), RESUME.get_options("HS_EDUCATION"), \
                                        RESUME.get_options("BACHELOR_EDUCATION"), RESUME.get_options("MASTER_EDUCATION")
-        APP.create_education(mp=_mp, hs=_hs, bachelor=_bachelor, master=_master)
+        _ = APP.create_education(mp=_mp, hs=_hs, bachelor=_bachelor, master=_master)
+        _.after(1000, skill)
 
     def project_experience():
-        _ = APP.create_project_experience()
+        _project_1, _project_2 = RESUME.get_options("PROJECT_1"), RESUME.get_options("PROJECT_2")
+        _project_3, _project_4 = RESUME.get_options("PROJECT_3"), RESUME.get_options("PROJECT_4")
+        _project_5 = RESUME.get_options("PROJECT_5")
+        _ = APP.create_project_experience(_project_1, _project_2, _project_3, _project_4, _project_5)
         _.after(1000, education)
 
     def contact():
