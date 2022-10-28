@@ -17,6 +17,17 @@ def speak(text: str):
     pass
 
 
+def language_fluency(rate: int | float):
+    if rate >= 95:
+        return "advanced"
+    elif rate >= 75:
+        return "more or less fluently"
+    elif rate >= 55:
+        return "average"
+    elif rate >= 35:
+        return "somewhat"
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # ASK.start()
@@ -31,15 +42,32 @@ if __name__ == '__main__':
     APP.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
     APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
 
+    def education():
+        _mp, _hs, _bachelor, _master = RESUME.get_options("MP_EDUCATION"), RESUME.get_options("HS_EDUCATION"), \
+                                       RESUME.get_options("BACHELOR_EDUCATION"), RESUME.get_options("MASTER_EDUCATION")
+        APP.create_education(mp=_mp, hs=_hs, bachelor=_bachelor, master=_master)
+
+    def project_experience():
+        _ = APP.create_project_experience()
+        _.after(1000, education)
+
+    def contact():
+        _mobile, _email, _website, _github, _address = RESUME.get_options("CONTACT")
+        speak(f"")
+        _ = APP.create_contact(mobile=_mobile, email=_email, website=_website, github=_github, address=_address)
+        _.after(1000, project_experience)
+
     def additional():
         _interest, _curiosity = RESUME.get_options("HOBBIES")
         speak(f"Just for a bit of my additional information, I've keen interests in {_interest}."
               f"I'm eager to {_curiosity}.")
         _ = APP.create_additional_info(interests=_interest, curiosities=_curiosity)
+        _.after(1000, contact)
 
     def communication():
         _languages = RESUME.get_options("COMMUNICATION")
-        speak("")
+        _lang1, _lang2, _lang3 = _languages
+        # speak("I can read, write and speak in {} {}".format(_lang1.split("; ")[0], language_fluency(_lang1.split("; ")[1])))
         _ = APP.create_communication(languages=_languages)
         _.after(1000, additional)
 
@@ -58,7 +86,6 @@ if __name__ == '__main__':
         _.after(1000, certification)
 
     APP.window.after(1000, title)
-    title, name, designation = RESUME.get_options("TITLE")
 
     # -------
     APP.display_window()

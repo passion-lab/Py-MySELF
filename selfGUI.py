@@ -327,15 +327,57 @@ class Self_Bio_GUI(Self_Ask_GUI):
               bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
               ).pack(padx=10, pady=(10, 0), anchor="w")
         Label(title_frame, text=mobile, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
         Label(title_frame, text=email, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
         Label(title_frame, text=website, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
         Label(title_frame, text=github, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
         Label(title_frame, text=address, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
               fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
 
         return title_frame
+
+    def create_right_section(self, section_name):
+        bg_panel = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
+        bg_panel.pack(side="top", fill="both", expand=True)
+        Label(bg_panel, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"],
+              fg=self.color_fg[self.theme]["section"]).pack(anchor="ne")
+        frame = Frame(bg_panel, bg=self.color_bg[self.theme]["others"])
+        frame.place(x=0, y=self.font["section"][1], relwidth=1.0, relheight=1.0)
+
+        return frame
+
+    def create_project_experience(self):
+        frame = self.create_right_section(section_name="PROJECT EXPERIENCES")
+        Label(frame, text="PROJECTS", font=self.font['heading'],
+              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
+              ).pack(padx=10, pady=(10, 0), anchor="w")
+        Label(frame, text="These are some of my projects that are responsible for the all experience I have regarding "
+                          "Python till now.", font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
+        Label(frame, text="Python, Js", font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+
+        return frame
+
+    def create_education(self, mp: list, hs: list, bachelor: list, master: list):
+        qualifications = {
+            "SECONDARY": (mp[0], mp[1], mp[2], mp[3], mp[4]),
+            "HIGHER SECONDARY": (hs[0], hs[1], hs[2], hs[3], hs[4]),
+            "BACHELOR": (bachelor[0], bachelor[1], bachelor[2], bachelor[3], bachelor[4]),
+            "MASTER": (master[0], master[1], master[2], master[3], master[4])
+        }
+        frame = self.create_right_section("EDUCATION")
+        for qualification in qualifications:
+            Label(frame, text=f"{qualifications[qualification][1].upper()} | {qualifications[qualification][0]}",
+                  font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
+                  fg=self.color_fg[self.theme]['heading'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
+            Label(frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
+                              f"during {qualifications[qualification][2]}.", font=self.font['body'],
+                  bg=self.color_bg[self.theme]['others'],
+                  fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
+
+        return frame
 
