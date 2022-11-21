@@ -92,7 +92,7 @@ if __name__ == '__main__':
         _ = APP.create_title(title=_title, name=_name, designation=_designation)
         _.after(1000, certification)
 
-    APP.window.after(1000, title)
+    APP.window.after(1000, project_experience)
 
     # -------
     APP.display_window()
