@@ -35,16 +35,16 @@ class Self_GUI_Styles:
                 "subtitle": "darkgrey",
                 "body"    : "black",
                 "action"  : "lightgrey",
-                "section": "#EEEEEE"
+                "section" : "#EEEEEE"
             },
             "Dark" : {
-                "title": "white",
-                "heading": "grey",
+                "title"   : "white",
+                "heading" : "grey",
                 "emphasis": "darkgrey",
                 "subtitle": "white",
-                "body": "lightgrey",
-                "action": "#2D2D2D",
-                "section": "#3D3D3D"
+                "body"    : "lightgrey",
+                "action"  : "#2D2D2D",
+                "section" : "#3D3D3D"
             }
         }
         self.color_bg = {
@@ -317,7 +317,8 @@ class Self_Bio_GUI(Self_Ask_GUI):
               ).pack(padx=10, pady=(10, 0), anchor="w")
         for i, language in enumerate(languages):
             Label(title_frame, text=language, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-                  fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10) if i == 2 else 0, anchor="w")
+                  fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10) if i == 2 else 0,
+                                                                         anchor="w")
 
         return title_frame
 
@@ -340,14 +341,28 @@ class Self_Bio_GUI(Self_Ask_GUI):
         return title_frame
 
     def create_right_section(self, section_name):
-        bg_panel = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
-        bg_panel.pack(side="top", fill="both", expand=True, pady=0, anchor="n")
-        Label(bg_panel, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"], anchor="ne",
-              fg=self.color_fg[self.theme]["section"]).pack(anchor="ne", pady=0)
-        frame = Frame(bg_panel, bg=self.color_bg[self.theme]["others"])
-        frame.place(x=0, y=self.font["section"][1], relwidth=1.0, relheight=1.0)
+        # Conventional frame
+        # bg_panel = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
+        # bg_panel.pack(side="top", fill="both", expand=True, pady=0, anchor="n")
+        # Label(bg_panel, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"], anchor="ne",
+        #       fg=self.color_fg[self.theme]["section"]).pack(anchor="ne", pady=0)
+        # frame = Frame(bg_panel, bg=self.color_bg[self.theme]["others"])
+        # frame.place(x=0, y=self.font["section"][1], relwidth=1.0, relheight=1.0)
 
-        return frame
+        # Alternative grid frame
+        frame1 = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
+        frame1.pack(side="top", fill="both", expand=False)
+        frame1.rowconfigure(0, minsize=self.font["section"][1] / 2)
+        frame1.rowconfigure(1, minsize=self.font["section"][1] / 2)
+        frame1.rowconfigure(2, minsize=self.font["section"][1] / 2)
+        frame1.columnconfigure(0, weight=1)
+
+        Label(frame1, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"],
+              fg=self.color_fg[self.theme]["section"], anchor="w").grid(row=0, rowspan=2, column=0,)
+        frame2 = Frame(frame1, bg=self.color_bg[self.theme]["others"])
+        frame2.grid(row=1, rowspan=2, column=0, pady=(20, 0), sticky="nsew")
+
+        return frame2
 
     def create_project_experience(self, project_1: list, project_2: list, project_3: list,
                                   project_4: list, project_5: list):
@@ -358,13 +373,25 @@ class Self_Bio_GUI(Self_Ask_GUI):
             4: (project_4[0], project_4[1], project_4[2]),
             5: (project_5[0], project_5[1], project_5[2])
         }
-        frame = self.create_right_section(section_name="PROJECT EXPERIENCES")
+        frame = self.create_right_section("PROJECT EXPERIENCES")
+        frame.columnconfigure(0, weight=1)
         i = 0
         for _, project in projects.items():
-            Label(frame, text=project[0], font=self.font['heading'],
+            # Old code...
+            # Label(frame, text=project[0], font=self.font['heading'],
+            #       bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
+            #       ).pack(padx=10, pady=(10, 0) if i == 0 else 0, anchor="w")
+            # Label(frame, text=project[1], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+            #       fg=self.color_fg[self.theme]['body'],
+            #       anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else (0, 5), anchor="w")
+
+            # New code...
+            label_frame = Frame(frame, bg=self.color_bg[self.theme]['others'])
+            label_frame.grid(row=i, sticky="ew")
+            Label(label_frame, text=project[0], font=self.font['heading'],
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
                   ).pack(padx=10, pady=(10, 0) if i == 0 else 0, anchor="w")
-            Label(frame, text=project[1], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+            Label(label_frame, text=project[1], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'],
                   anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else (0, 5), anchor="w")
             i += 1
@@ -373,17 +400,20 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
     def create_education(self, mp: list, hs: list, bachelor: list, master: list):
         qualifications = {
-            "SECONDARY": (mp[0], mp[1], mp[2], mp[3], mp[4]),
+            "MASTER": (master[0], master[1], master[2], master[3], master[4]),
+            "BACHELOR"        : (bachelor[0], bachelor[1], bachelor[2], bachelor[3], bachelor[4]),
             "HIGHER SECONDARY": (hs[0], hs[1], hs[2], hs[3], hs[4]),
-            "BACHELOR": (bachelor[0], bachelor[1], bachelor[2], bachelor[3], bachelor[4]),
-            "MASTER": (master[0], master[1], master[2], master[3], master[4])
+            "SECONDARY": (mp[0], mp[1], mp[2], mp[3], mp[4])
         }
-        frame = self.create_right_section("EDUCATION")
-        for qualification in qualifications:
-            Label(frame, text=f"{qualifications[qualification][1].upper()} | {qualifications[qualification][0]}",
+        frame = self.create_right_section("SKILLS")
+        frame.columnconfigure(0, weight=1)
+        for i, qualification in enumerate(qualifications):
+            label_frame = Frame(frame, bg=self.color_bg[self.theme]['others'])
+            label_frame.grid(row=i, sticky="ew")
+            Label(label_frame, text=f"{qualifications[qualification][1].upper()} | {qualifications[qualification][0]}",
                   font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['heading'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
-            Label(frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
+            Label(label_frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
                               f"during {qualifications[qualification][2]}.", font=self.font['body'],
                   bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
@@ -392,7 +422,17 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
     def create_skills(self):
         frame = self.create_right_section("SKILLS")
+        # Code location changed -> self.create_right_section()
         frame.columnconfigure(0, weight=1)
         frame.columnconfigure(1, weight=1)
-        for i in range(3): frame.rowconfigure(i, weight=1)
+        # for i in range(4):
+        #     frame.rowconfigure(i, weight=1)
+        Label(frame, text="Hi").grid(row=0, column=0, sticky="ew")
+        Label(frame, text="Hi").grid(row=0, column=1, sticky="ew")
+        Label(frame, text="Hi").grid(row=1, column=0)
+        Label(frame, text="Hi").grid(row=1, column=1)
+        Label(frame, text="Hi").grid(row=2, column=0)
+        Label(frame, text="Hi").grid(row=2, column=1)
+        Label(frame, text="Hi").grid(row=3, column=0)
+        Label(frame, text="Hi").grid(row=3, column=1)
 
