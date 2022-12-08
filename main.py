@@ -43,7 +43,8 @@ if __name__ == '__main__':
     APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
 
     def skill():
-        APP.create_skills()
+        _skills = RESUME.get_options('KEY_SKILLS')
+        APP.create_skills(_skills)
 
     def education():
         _mp, _hs, _bachelor, _master = RESUME.get_options("MP_EDUCATION"), RESUME.get_options("HS_EDUCATION"), \
@@ -58,11 +59,16 @@ if __name__ == '__main__':
         _ = APP.create_project_experience(_project_1, _project_2, _project_3, _project_4, _project_5)
         _.after(1000, education)
 
+    def additional_skills():
+        _additional_skills = RESUME.get_options("ADDITIONAL_SKILLS")
+        _ = APP.create_additional_skills(_additional_skills)
+        _.after(1000, project_experience)
+
     def contact():
         _mobile, _email, _website, _github, _address = RESUME.get_options("CONTACT")
         speak(f"")
         _ = APP.create_contact(mobile=_mobile, email=_email, website=_website, github=_github, address=_address)
-        _.after(1000, project_experience)
+        _.after(1000, additional_skills)
 
     def additional():
         _interest, _curiosity = RESUME.get_options("HOBBIES")
@@ -92,7 +98,7 @@ if __name__ == '__main__':
         _ = APP.create_title(title=_title, name=_name, designation=_designation)
         _.after(1000, certification)
 
-    APP.window.after(1000, project_experience)
+    APP.window.after(1000, title)
 
     # -------
     APP.display_window()
