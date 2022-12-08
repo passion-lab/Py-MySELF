@@ -347,7 +347,8 @@ class Self_Bio_GUI(Self_Ask_GUI):
               bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
               ).pack(padx=10, pady=(10, 0), anchor="w")
         Label(title_frame, text=" | ".join(add_skills), font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w", wraplength=500, justify='left').pack(padx=10, pady=(0, 10), anchor="w")
+              fg=self.color_fg[self.theme]['body'], anchor="w", wraplength=500, justify='left').pack(
+            padx=10, pady=(0, 10), anchor="w")
 
         return title_frame
 
