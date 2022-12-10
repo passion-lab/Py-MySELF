@@ -39,8 +39,8 @@ if __name__ == '__main__':
     APP.main_window()
     APP.create_two_columns()
     # For testing purposes only
-    APP.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
-    APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
+    # APP.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
+    # APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
 
     def skill():
         _skills = RESUME.get_options('KEY_SKILLS')
