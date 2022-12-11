@@ -352,27 +352,6 @@ class Self_Bio_GUI(Self_Ask_GUI):
         return title_frame
 
     def create_right_section(self, section_name):
-        # Conventional frame
-        # bg_panel = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
-        # bg_panel.pack(side="top", fill="both", expand=True, pady=0, anchor="n")
-        # Label(bg_panel, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"], anchor="ne",
-        #       fg=self.color_fg[self.theme]["section"]).pack(anchor="ne", pady=0)
-        # frame = Frame(bg_panel, bg=self.color_bg[self.theme]["others"])
-        # frame.place(x=0, y=self.font["section"][1], relwidth=1.0, relheight=1.0)
-
-        # Alternative grid frame
-        # frame1 = Frame(self.right_panel, bg=self.color_bg[self.theme]["BG"])
-        # frame1.pack(side="top", fill="both", expand=False)
-        # frame1.rowconfigure(0, minsize=self.font["section"][1] / 2)
-        # frame1.rowconfigure(1, minsize=self.font["section"][1] / 2)
-        # frame1.rowconfigure(2, minsize=self.font["section"][1] / 2)
-        # frame1.columnconfigure(0, weight=1)
-        #
-        # Label(frame1, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]["BG"],
-        #       fg=self.color_fg[self.theme]["section"], anchor="w").grid(row=0, rowspan=2, column=0,)
-        # frame2 = Frame(frame1, bg=self.color_bg[self.theme]["others"])
-        # frame2.grid(row=1, rowspan=2, column=0, pady=(20, 0), sticky="nsew")
-
         bg_frame = Frame(self.right_panel, bg=self.color_bg[self.theme]['BG'], height=1000)
         bg_frame.pack(side="top", fill="both")
         Label(bg_frame, text=section_name, font=self.font["section"], bg=self.color_bg[self.theme]['BG'],
@@ -433,7 +412,6 @@ class Self_Bio_GUI(Self_Ask_GUI):
         return bg_frame
 
     def create_skills(self, skills: list):
-        print(skills[1:])
         bg_frame = self.create_right_section("SKILLS")
         # Adding required amount of blanks texts for background frame's space
         for _ in range(3):
@@ -444,12 +422,9 @@ class Self_Bio_GUI(Self_Ask_GUI):
         Label(fg_frame, text=skills[0].upper(),
               font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
               fg=self.color_fg[self.theme]['heading'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
-        # Label(fg_frame, text=skills[1:], font=self.font['body'],
-        #       bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body'],
-        #       anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
+
         text_frame = Frame(fg_frame)
         text_frame.pack(fill="x", padx=10)
-
         for i in range(3):
             text_frame.columnconfigure(i, weight=1)
             text_frame.rowconfigure(i, weight=1)
@@ -459,17 +434,3 @@ class Self_Bio_GUI(Self_Ask_GUI):
             Label(text_frame, text=skills[1].split(";")[i + 3], font=self.font['body'], anchor="w",
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=1, column=i,
                                                                                                      sticky="nsew")
-        """
-        Label(text_frame, text=skills[1].split(";")[0], font=self.font['body'], anchor="w",
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=0, column=0, sticky="nsew")
-        Label(text_frame, text=skills[1].split(";")[1], font=self.font['body'], anchor="w",
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=0, column=1, sticky="nsew")
-        Label(text_frame, text=skills[1].split(";")[2], font=self.font['body'], anchor="w",
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=0, column=2, sticky="nsew")
-        Label(text_frame, text=skills[1].split(";")[3], font=self.font['body'], anchor="w",
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=1, column=0, sticky="nsew")
-        Label(text_frame, text=skills[1].split(";")[4], font=self.font['body'], anchor="w",
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=1, column=1, sticky="nsew")
-        Label(text_frame, text=skills[1].split(";")[5], font=self.font['body'], anchor="w",
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=1, column=2, sticky="nsew")
-        """
