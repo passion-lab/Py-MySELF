@@ -275,10 +275,11 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
     def create_title(self, title, name, designation):
         title_frame = self.create_section(self.left_panel)
-        Label(title_frame, text=title, font=self.font['title'], bg=self.color_bg[self.theme]['others'],
+        title_frame.configure(background=self.color_bg[self.theme]['BG'])
+        Label(title_frame, text=title, font=self.font['title'], bg=self.color_bg[self.theme]['BG'],
               fg=self.color_fg[self.theme]['title'], anchor="w").pack(padx=10, pady=(20, 0), anchor="w")
         Label(title_frame, text=f"{name} | {designation}", font=self.font['heading'],
-              bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
+              bg=self.color_bg[self.theme]['BG'], fg=self.color_fg[self.theme]['heading'], anchor="w",
               ).pack(padx=10, pady=(0, 20), anchor="w")
 
         return title_frame
