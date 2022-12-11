@@ -7,7 +7,7 @@ from time import sleep
 TTS = tts_init()
 TTS.setProperty('rate', 200)
 RESUME = SelfINFO("./RESUME.ini")
-# ASK = Self_Ask_GUI()
+ASK = Self_Ask_GUI()
 
 
 # Speak function
@@ -30,11 +30,11 @@ def language_fluency(rate: int | float):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # ASK.start()
-    # salutation, theme = ASK.get_answers()
-    salutation = "Sir"
+    ASK.start()
+    salutation, theme = ASK.get_answers()
+    # salutation = "Sir"
 
-    APP = Self_Bio_GUI(theme='Dark')
+    APP = Self_Bio_GUI(theme)
     APP.create_new_window(no_title_bar=True)
     APP.main_window()
     APP.create_two_columns()
