@@ -435,3 +435,4 @@ class Self_Bio_GUI(Self_Ask_GUI):
             Label(text_frame, text=skills[1].split(";")[i + 3], font=self.font['body'], anchor="w",
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=1, column=i,
                                                                                                      sticky="nsew")
+        return bg_frame
