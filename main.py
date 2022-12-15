@@ -12,9 +12,9 @@ ASK = Self_Ask_GUI()
 
 # Speak function
 def speak(text: str):
-    TTS.say(text)
-    TTS.runAndWait()
-    # pass
+    # TTS.say(text)
+    # TTS.runAndWait()
+    pass
 
 
 def language_fluency(rate: int | float):
@@ -75,8 +75,9 @@ if __name__ == '__main__':
         _ = APP.create_project_experience(_project_1, _project_2, _project_3, _project_4, _project_5)
         _.after(1000, lambda: education(_p1=_project_1, _p2=_project_2, _p3=_project_3, _p4=_project_4, _p5=_project_5))
 
-    def conclusion(**add_skill):
-        pass
+    def conclusion(*add_skill):
+        speak(f"Besides Python what's my key skill, I also have some additional skills. Some of worth mentioning"
+              f"additional skills I know are: {add_skill[0]}")
 
     def additional_skills(**cont):
         speak(f"If your kind consider allow you, kindly don't hesitate to contact me by calling me at "
@@ -85,7 +86,7 @@ if __name__ == '__main__':
 
         _additional_skills = RESUME.get_options("ADDITIONAL_SKILLS")
         _ = APP.create_additional_skills(_additional_skills)
-        _.after(1000, lambda: conclusion())
+        _.after(1000, lambda: conclusion(_additional_skills))
 
     def contact(**add):
         speak(f"Just for a bit of my additional information, I've keen interests in {add['_interest']}."
@@ -97,8 +98,8 @@ if __name__ == '__main__':
 
     def additional(**lang):
         for i in range(1, 4):
-            globals()[f'lang_{i}'] = lang[f'_lang{i}'].split("; ")[0]
-            globals()[f'lang_{i}_fluency'] = language_fluency(int(lang[f'_lang{i}'].split("; ")[1].strip("%")))
+            globals()[f'lang_{i}'] = lang[f'_lang{i}'].split(" - ")[1]
+            globals()[f'lang_{i}_fluency'] = language_fluency(int(lang[f'_lang{i}'].split(" - ")[0].strip("%")))
         speak(f"I can read, write and speak in {globals()['lang_1']}, {globals()['lang_2']} "
               f"{globals()['lang_1_fluency']}. In addition, I known {globals()['lang_3']} {globals()['lang_3_fluency']}")
 
@@ -116,7 +117,7 @@ if __name__ == '__main__':
         _.after(1000, lambda: additional(_lang1=_lang1, _lang2=_lang2, _lang3=_lang3))
 
     def certification(*skills):
-        speak(f"In {skills[0][0]}, which is my primary skill, I know {skills[0][1]}.")
+        speak(f"In {skills[0][0]}, which is my primary skill, I know nearly about {skills[0][1].replace('-', 'of')}.")
 
         _name, _year = RESUME.get_options("IT_CERTIFICATION")
         _ = APP.create_certification(_name, _year)
