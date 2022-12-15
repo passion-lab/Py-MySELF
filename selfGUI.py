@@ -316,10 +316,16 @@ class Self_Bio_GUI(Self_Ask_GUI):
         Label(title_frame, text="READ, WRITE AND SPEAK IN", font=self.font['heading'],
               bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
               ).pack(padx=10, pady=(10, 0), anchor="w")
+
+        grid_frame = Frame(title_frame)
+        grid_frame.pack(fill="x", padx=10, pady=(0, 10))
         for i, language in enumerate(languages):
-            Label(title_frame, text=language, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-                  fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10) if i == 2 else 0,
-                                                                         anchor="w")
+            grid_frame.columnconfigure(i, weight=1)
+            # Label(title_frame, text=language, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+            #       fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10) if i == 2 else 0,
+            #                                                              anchor="w", side="left")
+            Label(grid_frame, text=language, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+                  fg=self.color_fg[self.theme]['body'], anchor="w").grid(row=0, column=i, sticky='ew')
 
         return title_frame
 
