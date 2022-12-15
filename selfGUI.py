@@ -413,7 +413,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
         return bg_frame
 
     def create_skills(self, skills: list):
-        bg_frame = self.create_right_section("SKILLS")
+        bg_frame = self.create_right_section("KEY SKILLS")
         # Adding required amount of blanks texts for background frame's space
         for _ in range(3):
             Label(bg_frame, text="").pack()
