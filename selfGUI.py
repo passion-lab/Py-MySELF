@@ -3,6 +3,7 @@ from tkinter import (
     StringVar,
     Frame, Label, Canvas, PhotoImage, Message, Button
 )
+from webbrowser import open_new_tab
 
 
 class Self_GUI_Styles:
@@ -369,11 +370,11 @@ class Self_Bio_GUI(Self_Ask_GUI):
     def create_project_experience(self, project_1: list, project_2: list, project_3: list,
                                   project_4: list, project_5: list):
         projects = {
-            1: (project_1[0], project_1[1], project_1[2]),
-            2: (project_2[0], project_2[1], project_2[2]),
-            3: (project_3[0], project_3[1], project_3[2]),
-            4: (project_4[0], project_4[1], project_4[2]),
-            5: (project_5[0], project_5[1], project_5[2])
+            1: (project_1[0], project_1[1], project_1[2], project_1[3]),
+            2: (project_2[0], project_2[1], project_2[2], project_2[3]),
+            3: (project_3[0], project_3[1], project_3[2], project_3[3]),
+            4: (project_4[0], project_4[1], project_4[2], project_4[3]),
+            5: (project_5[0], project_5[1], project_5[2], project_5[3])
         }
 
         bg_frame = self.create_right_section("PROJECTS")
@@ -387,15 +388,20 @@ class Self_Bio_GUI(Self_Ask_GUI):
         for _, project in projects.items():
             title_frame = Frame(fg_frame, bg=self.color_bg[self.theme]['others'])
             title_frame.pack(fill="x", padx=10, pady=(10, 0) if i == 0 else 0)
-            title_frame.columnconfigure(0, weight=1)
-            title_frame.columnconfigure(1, weight=1)
-            Label(title_frame, text=project[0], font=self.font['heading'],
+            # title_frame.columnconfigure(0, weight=1)
+            # title_frame.columnconfigure(1, weight=1)
+            title_frame.columnconfigure(2, weight=1)
+            Label(title_frame, text=project[0], font=self.font['heading'], justify='left',
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
                   ).grid(row=0, column=0, sticky="w")
+            Label(title_frame, text=project[1], font=self.font['subtitle'], justify='left',
+                  bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
+                  ).grid(row=0, column=1, sticky="w")
             Button(title_frame, text="[  GitHub Repo ]", bd=0, bg=self.color_bg[self.theme]['others'], cursor="hand2",
                    fg=self.color_fg[self.theme]['heading'], activebackground=self.color_bg[self.theme]['others'],
-                   activeforeground="teal", anchor="e").grid(row=0, column=1, sticky="e")
-            Label(fg_frame, text=project[1], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+                   activeforeground="teal", anchor="e", command=lambda link=project[3]: open_new_tab(link),
+                   ).grid(row=0, column=2, sticky="e")
+            Label(fg_frame, text=project[2], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'],
                   anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else 0, anchor="w")
         return bg_frame
