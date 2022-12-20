@@ -388,8 +388,6 @@ class Self_Bio_GUI(Self_Ask_GUI):
         for _, project in projects.items():
             title_frame = Frame(fg_frame, bg=self.color_bg[self.theme]['others'])
             title_frame.pack(fill="x", padx=10, pady=(10, 0) if i == 0 else 0)
-            # title_frame.columnconfigure(0, weight=1)
-            # title_frame.columnconfigure(1, weight=1)
             title_frame.columnconfigure(2, weight=1)
             Label(title_frame, text=project[0], font=self.font['heading'], justify='left',
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
