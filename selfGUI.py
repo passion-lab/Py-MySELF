@@ -389,25 +389,23 @@ class Self_Bio_GUI(Self_Ask_GUI):
             title_frame.pack(fill="x", padx=10, pady=(10, 0) if i == 0 else 0)
             title_frame.columnconfigure(0, weight=1)
             title_frame.columnconfigure(1, weight=1)
-            # padx = 10, pady = (10, 0) if i == 0 else 0, anchor = "w"
             Label(title_frame, text=project[0], font=self.font['heading'],
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
                   ).grid(row=0, column=0, sticky="w")
-            Button(title_frame, text="[ GitHub Repo ]", bd=0, bg=self.color_bg[self.theme]['others'], cursor="hand2",
+            Button(title_frame, text="[  GitHub Repo ]", bd=0, bg=self.color_bg[self.theme]['others'], cursor="hand2",
                    fg=self.color_fg[self.theme]['heading'], activebackground=self.color_bg[self.theme]['others'],
-                   activeforeground="teal", overrelief="flat", anchor="e").grid(row=0, column=1, sticky="e")
+                   activeforeground="teal", anchor="e").grid(row=0, column=1, sticky="e")
             Label(fg_frame, text=project[1], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'],
                   anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else 0, anchor="w")
-
         return bg_frame
 
     def create_education(self, mp: list, hs: list, bachelor: list, master: list):
         qualifications = {
-            "MASTER": (master[0], master[1], master[2], master[3], master[4]),
+            "MASTER"          : (master[0], master[1], master[2], master[3], master[4]),
             "BACHELOR"        : (bachelor[0], bachelor[1], bachelor[2], bachelor[3], bachelor[4]),
             "HIGHER SECONDARY": (hs[0], hs[1], hs[2], hs[3], hs[4]),
-            "SECONDARY": (mp[0], mp[1], mp[2], mp[3], mp[4])
+            "SECONDARY"       : (mp[0], mp[1], mp[2], mp[3], mp[4])
         }
         bg_frame = self.create_right_section("EDUCATION")
         # Adding required amount of blanks texts for background frame's space
@@ -420,7 +418,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
                   font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['heading'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
             Label(fg_frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
-                              f"during {qualifications[qualification][2]}.", font=self.font['body'],
+                                 f"during {qualifications[qualification][2]}.", font=self.font['body'],
                   bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
 
