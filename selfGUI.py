@@ -402,8 +402,8 @@ class Self_Bio_GUI(Self_Ask_GUI):
                   ).grid(row=0, column=1, sticky="w")
             Button(title_frame, text="[  GitHub Repo ]", bd=0, bg=self.color_bg[self.theme]['others'], cursor="hand2",
                    fg=self.color_fg[self.theme]['heading'], activebackground=self.color_bg[self.theme]['others'],
-                   activeforeground="teal", anchor="e", command=lambda link=project[3]: open_new_tab(link),
-                   ).grid(row=0, column=2, sticky="e")
+                   activeforeground=self.color_fg[self.theme]['highlight'], anchor="e",
+                   command=lambda link=project[3]: open_new_tab(link)).grid(row=0, column=2, sticky="e")
             Label(fg_frame, text=project[2], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'],
                   anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else 0, anchor="w")
