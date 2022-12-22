@@ -453,10 +453,10 @@ class Self_Bio_GUI(Self_Ask_GUI):
         Label(title_frame, text=skills[0].upper(),
               font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
               fg=self.color_fg[self.theme]['highlight'], anchor="w").grid(row=0, column=0, sticky='w')
-        button = Label(title_frame, text="[  Passion-Lab ]", bg=self.color_bg[self.theme]['others'], cursor='hand2',
+        button = Label(title_frame, text=f"[  {skills[2]} ]", bg=self.color_bg[self.theme]['others'], cursor='hand2',
                        fg=self.color_fg[self.theme]['heading'], activeforeground=self.color_fg[self.theme]['highlight'])
         button.grid(row=0, column=1, sticky='e')
-        button.bind('<Button-1>', lambda e=None: open_new_tab("https://www.github.com/Passion-Lab"))
+        button.bind('<Button-1>', lambda e=None: open_new_tab(f"https://www.github.com/{skills[2]}"))
         button.bind('<Enter>', lambda e=None: button.configure(fg=self.color_fg[self.theme]['highlight']))
         button.bind('<Leave>', lambda e=None: button.configure(fg=self.color_fg[self.theme]['heading']))
 
