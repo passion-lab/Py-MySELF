@@ -424,9 +424,14 @@ class Self_Bio_GUI(Self_Ask_GUI):
         fg_frame = Frame(bg_frame, bg=self.color_bg[self.theme]['others'])
         fg_frame.place(x=0, y=30, relwidth=1.0, relheight=1.0)
         for i, qualification in enumerate(qualifications):
-            Label(fg_frame, text=f"{qualifications[qualification][1].upper()} | {qualifications[qualification][0]}",
+            title_frame = Frame(fg_frame, bg=self.color_bg[self.theme]['others'])
+            title_frame.pack(padx=10, pady=(10, 0), anchor="w")
+            Label(title_frame, text=qualifications[qualification][1].upper(),
                   font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
-                  fg=self.color_fg[self.theme]['heading'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
+                  fg=self.color_fg[self.theme]['highlight'], anchor="w").grid(row=0, column=0, sticky='w')
+            Label(title_frame, text=qualifications[qualification][0],
+                  font=self.font['subtitle'], bg=self.color_bg[self.theme]['others'],
+                  fg=self.color_fg[self.theme]['heading'], anchor="w").grid(row=0, column=1, sticky='w')
             Label(fg_frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
                                  f"during {qualifications[qualification][2]}.", font=self.font['body'],
                   bg=self.color_bg[self.theme]['others'],
