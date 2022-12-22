@@ -447,9 +447,18 @@ class Self_Bio_GUI(Self_Ask_GUI):
         fg_frame = Frame(bg_frame, bg=self.color_bg[self.theme]['others'])
         fg_frame.place(x=0, y=30, relwidth=1.0, relheight=1.0)
 
-        Label(fg_frame, text=skills[0].upper(),
+        title_frame = Frame(fg_frame, bg=self.color_bg[self.theme]['others'])
+        title_frame.pack(fill='x', padx=10, pady=(10, 0), anchor='w')
+        title_frame.columnconfigure(1, weight=1)
+        Label(title_frame, text=skills[0].upper(),
               font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['highlight'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
+              fg=self.color_fg[self.theme]['highlight'], anchor="w").grid(row=0, column=0, sticky='w')
+        button = Label(title_frame, text="[  Passion-Lab ]", bg=self.color_bg[self.theme]['others'], cursor='hand2',
+                       fg=self.color_fg[self.theme]['heading'], activeforeground=self.color_fg[self.theme]['highlight'])
+        button.grid(row=0, column=1, sticky='e')
+        button.bind('<Button-1>', lambda e=None: open_new_tab("https://www.github.com/Passion-Lab"))
+        button.bind('<Enter>', lambda e=None: button.configure(fg=self.color_fg[self.theme]['highlight']))
+        button.bind('<Leave>', lambda e=None: button.configure(fg=self.color_fg[self.theme]['heading']))
 
         text_frame = Frame(fg_frame)
         text_frame.pack(fill="x", padx=10)
