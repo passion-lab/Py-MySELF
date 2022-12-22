@@ -153,12 +153,12 @@ class Self_Ask_GUI(Self_GUI_Styles):
         self.window.configure(background=self.color_bg[self.theme]['others'])
         # Whole window frame
         window_frame = Frame(self.window, background=self.color_bg[self.theme]['others'])
-        window_frame.pack(fill="both", expand=True, padx=10)
+        window_frame.pack(fill="both", expand=True, padx=20)
 
         # Skip button
         skip = Label(window_frame, text="", anchor="e", font=self.icon['action'],
                      background=self.color_bg[self.theme]['others'], foreground=self.color_fg[self.theme]['action'])
-        skip.pack(fill="x", padx=10, anchor="n")
+        skip.pack(fill="x", padx=0, anchor="n")
         # Hide the question window on click for the next
         skip.bind('<Button-1>', lambda e=None: self.assign_salutation_theme())
         # Skip button appears in mouse hover on window
@@ -174,18 +174,16 @@ class Self_Ask_GUI(Self_GUI_Styles):
         # Options frame for displaying the both side-by-side
         option_frame = Frame(window_frame, background=self.color_bg[self.theme]['others'])
         option_frame.pack(fill="x", pady=(20, 0))
-        # Option 1
-        option_1 = Label(option_frame, text=options[0], font=self.font['body'], anchor="e",
-                         background=self.color_bg[self.theme]['others'], foreground=self.color_fg[self.theme]['body'])
-        option_1.pack(side="left", fill="x", expand=True, padx=20)
-        # Selects option 1 on click and hide the question window for the next
-        option_1.bind('<Button-1>', lambda e=None: self.assign_salutation_theme(options[0]))
-        # Option 2
-        option_2 = Label(option_frame, text=options[1], font=self.font['body'], anchor="w",
-                         background=self.color_bg[self.theme]['others'], foreground=self.color_fg[self.theme]['body'])
-        option_2.pack(side="left", fill="x", expand=True, padx=20)
-        # Selects option 2 on click and hide the question window for the next
-        option_2.bind('<Button-1>', lambda e=None: self.assign_salutation_theme(options[1]))
+        for i in range(2):
+            option_frame.columnconfigure(i, weight=1)
+            # Option
+            option = Label(option_frame, text=options[i], font=self.font['body'], anchor="center",
+                           bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body'])
+            option.grid(row=0, column=i, sticky='ew')
+            # Selects an option on click and hide the question window for the next
+            option.bind('<Button-1>', lambda e=None, text=options[i]: self.assign_salutation_theme(text))
+            option.bind('<Enter>', lambda e=None, b=option: b.configure(fg=self.color_fg[self.theme]['highlight']))
+            option.bind('<Leave>', lambda e=None, b=option: b.configure(fg=self.color_fg[self.theme]['body']))
 
         return self.window  # returns the whole ask window itself
 
