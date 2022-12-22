@@ -427,13 +427,20 @@ class Self_Bio_GUI(Self_Ask_GUI):
         fg_frame.place(x=0, y=30, relwidth=1.0, relheight=1.0)
         for i, qualification in enumerate(qualifications):
             title_frame = Frame(fg_frame, bg=self.color_bg[self.theme]['others'])
-            title_frame.pack(padx=10, pady=(10, 0), anchor="w")
+            title_frame.pack(fill='x', padx=10, pady=(10, 0), anchor="w")
+            title_frame.columnconfigure(2, weight=1)
             Label(title_frame, text=qualifications[qualification][1].upper(),
                   font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['highlight'], anchor="w").grid(row=0, column=0, sticky='w')
             Label(title_frame, text=qualifications[qualification][0],
                   font=self.font['subtitle'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['heading'], anchor="w").grid(row=0, column=1, sticky='w')
+            button = Label(title_frame, text=f"[  Documents ]", bg=self.color_bg[self.theme]['others'],
+                           fg=self.color_fg[self.theme]['heading'], cursor='hand2')
+            button.grid(row=0, column=2, sticky='e')
+            button.bind('<Button-1>', lambda e=None, link="": open_new_tab(link))
+            button.bind('<Enter>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['highlight']))
+            button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
             Label(fg_frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
                                  f"during {qualifications[qualification][2]}.", font=self.font['body'],
                   bg=self.color_bg[self.theme]['others'],
