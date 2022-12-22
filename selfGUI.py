@@ -449,7 +449,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
         Label(fg_frame, text=skills[0].upper(),
               font=self.font['heading'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['heading'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
+              fg=self.color_fg[self.theme]['highlight'], anchor="w").pack(padx=10, pady=(10, 0), anchor="w")
 
         text_frame = Frame(fg_frame)
         text_frame.pack(fill="x", padx=10)
