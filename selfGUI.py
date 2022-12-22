@@ -31,23 +31,23 @@ class Self_GUI_Styles:
         self.color_fg = {
             "Light": {
                 "highlight": "#32AB90",
-                "title"   : "black",
-                "heading" : "grey",
-                "emphasis": "black",
-                "subtitle": "darkgrey",
-                "body"    : "black",
-                "action"  : "lightgrey",
-                "section" : "#EEEEEE"
+                "title"    : "black",
+                "heading"  : "grey",
+                "emphasis" : "black",
+                "subtitle" : "darkgrey",
+                "body"     : "black",
+                "action"   : "lightgrey",
+                "section"  : "#EEEEEE"
             },
-            "Dark": {
+            "Dark" : {
                 "highlight": "#4EFFD7",
-                "title"   : "white",
-                "heading" : "grey",
-                "emphasis": "darkgrey",
-                "subtitle": "white",
-                "body"    : "lightgrey",
-                "action"  : "#2D2D2D",
-                "section" : "#3D3D3D"
+                "title"    : "white",
+                "heading"  : "grey",
+                "emphasis" : "darkgrey",
+                "subtitle" : "white",
+                "body"     : "lightgrey",
+                "action"   : "#2D2D2D",
+                "section"  : "#3D3D3D"
             }
         }
         self.color_bg = {
@@ -400,10 +400,12 @@ class Self_Bio_GUI(Self_Ask_GUI):
             Label(title_frame, text=project[1], font=self.font['subtitle'], justify='left',
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
                   ).grid(row=0, column=1, sticky="w")
-            Button(title_frame, text="[  GitHub Repo ]", bd=0, bg=self.color_bg[self.theme]['others'], cursor="hand2",
-                   fg=self.color_fg[self.theme]['heading'], activebackground=self.color_bg[self.theme]['others'],
-                   activeforeground=self.color_fg[self.theme]['highlight'], anchor="e",
-                   command=lambda link=project[3]: open_new_tab(link)).grid(row=0, column=2, sticky="e")
+            button = Label(title_frame, text="[  GitHub Repo ]", bg=self.color_bg[self.theme]['others'],
+                           cursor='hand2', fg=self.color_fg[self.theme]['heading'])
+            button.grid(row=0, column=2, sticky='e')
+            button.bind('<Button-1>', lambda e=None, link=project[3]: open_new_tab(link))
+            button.bind('<Enter>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['highlight']))
+            button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
             Label(fg_frame, text=project[2], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'],
                   anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else 0, anchor="w")
