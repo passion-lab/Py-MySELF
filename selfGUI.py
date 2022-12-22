@@ -30,6 +30,7 @@ class Self_GUI_Styles:
         # Colors
         self.color_fg = {
             "Light": {
+                "highlight": "#32AB90",
                 "title"   : "black",
                 "heading" : "grey",
                 "emphasis": "black",
@@ -38,7 +39,8 @@ class Self_GUI_Styles:
                 "action"  : "lightgrey",
                 "section" : "#EEEEEE"
             },
-            "Dark" : {
+            "Dark": {
+                "highlight": "#4EFFD7",
                 "title"   : "white",
                 "heading" : "grey",
                 "emphasis": "darkgrey",
@@ -279,9 +281,12 @@ class Self_Bio_GUI(Self_Ask_GUI):
         title_frame.configure(background=self.color_bg[self.theme]['BG'])
         Label(title_frame, text=title, font=self.font['title'], bg=self.color_bg[self.theme]['BG'],
               fg=self.color_fg[self.theme]['title'], anchor="w").pack(padx=10, pady=(20, 0), anchor="w")
-        Label(title_frame, text=f"{name} | {designation}", font=self.font['heading'],
-              bg=self.color_bg[self.theme]['BG'], fg=self.color_fg[self.theme]['heading'], anchor="w",
-              ).pack(padx=10, pady=(0, 20), anchor="w")
+        subtitle_frame = Frame(title_frame, bg=self.color_bg[self.theme]['BG'])
+        subtitle_frame.pack(padx=10, pady=(0, 20), anchor="w")
+        Label(subtitle_frame, text=name, font=self.font['heading'], bg=self.color_bg[self.theme]['BG'],
+              fg=self.color_fg[self.theme]['highlight'], anchor="w").grid(row=0, column=0, sticky="w")
+        Label(subtitle_frame, text=designation, font=self.font['heading'], bg=self.color_bg[self.theme]['BG'],
+              fg=self.color_fg[self.theme]['heading'], anchor="w").grid(row=0, column=1, sticky="w")
 
         return title_frame
 
