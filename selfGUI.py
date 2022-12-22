@@ -395,7 +395,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
             title_frame.pack(fill="x", padx=10, pady=(10, 0) if i == 0 else 0)
             title_frame.columnconfigure(2, weight=1)
             Label(title_frame, text=project[0], font=self.font['heading'], justify='left',
-                  bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
+                  bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['highlight'], anchor="w",
                   ).grid(row=0, column=0, sticky="w")
             Label(title_frame, text=project[1], font=self.font['subtitle'], justify='left',
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
@@ -407,6 +407,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
             Label(fg_frame, text=project[2], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
                   fg=self.color_fg[self.theme]['body'],
                   anchor="w").pack(padx=10, pady=(0, 10) if i == 4 else 0, anchor="w")
+
         return bg_frame
 
     def create_education(self, mp: list, hs: list, bachelor: list, master: list):
