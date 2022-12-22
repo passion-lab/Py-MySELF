@@ -414,10 +414,10 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
     def create_education(self, mp: list, hs: list, bachelor: list, master: list):
         qualifications = {
-            "MASTER"          : (master[0], master[1], master[2], master[3], master[4]),
-            "BACHELOR"        : (bachelor[0], bachelor[1], bachelor[2], bachelor[3], bachelor[4]),
-            "HIGHER SECONDARY": (hs[0], hs[1], hs[2], hs[3], hs[4]),
-            "SECONDARY"       : (mp[0], mp[1], mp[2], mp[3], mp[4])
+            "MASTER"          : (master[0], master[1], master[2], master[3], master[4], master[5]),
+            "BACHELOR"        : (bachelor[0], bachelor[1], bachelor[2], bachelor[3], bachelor[4], bachelor[5]),
+            "HIGHER SECONDARY": (hs[0], hs[1], hs[2], hs[3], hs[4], hs[5]),
+            "SECONDARY"       : (mp[0], mp[1], mp[2], mp[3], mp[4], mp[5])
         }
         bg_frame = self.create_right_section("EDUCATION")
         # Adding required amount of blanks texts for background frame's space
@@ -438,7 +438,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
             button = Label(title_frame, text=f"[  Documents ]", bg=self.color_bg[self.theme]['others'],
                            fg=self.color_fg[self.theme]['heading'], cursor='hand2')
             button.grid(row=0, column=2, sticky='e')
-            button.bind('<Button-1>', lambda e=None, link="": open_new_tab(link))
+            button.bind('<Button-1>', lambda e=None, link=qualifications[qualification][5]: open_new_tab(link))
             button.bind('<Enter>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['highlight']))
             button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
             Label(fg_frame, text=f"In {qualifications[qualification][3]} with {qualifications[qualification][4]} marks "
@@ -465,7 +465,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
         button = Label(title_frame, text=f"[  {skills[2]} ]", bg=self.color_bg[self.theme]['others'], cursor='hand2',
                        fg=self.color_fg[self.theme]['heading'], activeforeground=self.color_fg[self.theme]['highlight'])
         button.grid(row=0, column=1, sticky='e')
-        button.bind('<Button-1>', lambda e=None: open_new_tab(f"https://www.github.com/{skills[2]}"))
+        button.bind('<Button-1>', lambda e=None: open_new_tab(f"https://www.github.com/{skills[2]}?tab=repositories"))
         button.bind('<Enter>', lambda e=None: button.configure(fg=self.color_fg[self.theme]['highlight']))
         button.bind('<Leave>', lambda e=None: button.configure(fg=self.color_fg[self.theme]['heading']))
 
