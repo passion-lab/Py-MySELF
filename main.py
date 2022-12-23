@@ -38,11 +38,6 @@ if __name__ == '__main__':
     APP.create_new_window(no_title_bar=True)
     APP.main_window()
     temp = APP.initial_banner()
-    # temp.after(5000, lambda: temp.pack_forget())
-    # APP.create_two_columns()
-    # For testing purposes only
-    # APP.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
-    # APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
 
     def skill(**edu):
         speak(f"Speaking about my institutional education, I appeared {edu['_master'][1]} in {edu['_master'][3]}"
