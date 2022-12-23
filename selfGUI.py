@@ -232,16 +232,6 @@ class Self_Bio_GUI(Self_Ask_GUI):
         self.left_panel: Frame | None = None
         self.right_panel: Frame | None = None
 
-    # Just for testing purpose
-    def launch(self):
-        self.create_new_window(no_title_bar=True)
-        self.main_window()
-        self.create_two_columns()
-        self.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
-        self.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
-
-        self.display_window()
-
     def main_window(self):
         self.window.geometry(f"{self.screen_w}x{self.screen_h}")
         self.window.resizable(False, False)
@@ -250,7 +240,6 @@ class Self_Bio_GUI(Self_Ask_GUI):
     def initial_banner(self):
         frame = Frame(self.window, bg=self.color_bg[self.theme]['BG'])
         frame.pack(fill='both', expand=True, anchor='center')
-        # frame.grid(row=0, column=0, sticky='nsew')
         frame.columnconfigure(0, weight=1)
         frame.rowconfigure(0, weight=1)
         frame.rowconfigure(1, weight=1)
