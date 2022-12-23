@@ -234,8 +234,6 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
     # Just for testing purpose
     def launch(self):
-        from time import sleep
-
         self.create_new_window(no_title_bar=True)
         self.main_window()
         self.create_two_columns()
@@ -248,6 +246,20 @@ class Self_Bio_GUI(Self_Ask_GUI):
         self.window.geometry(f"{self.screen_w}x{self.screen_h}")
         self.window.resizable(False, False)
         self.window.configure(background=self.color_bg[self.theme]['BG'])
+
+    def initial_banner(self):
+        frame = Frame(self.window, bg=self.color_bg[self.theme]['BG'])
+        frame.pack(fill='both', expand=True, anchor='center')
+        # frame.grid(row=0, column=0, sticky='nsew')
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
+        frame.rowconfigure(1, weight=1)
+        Label(frame, text="Created and Best View", font=self.font['section'], fg=self.color_fg[self.theme]['section'],
+              bg=self.color_bg[self.theme]['BG'], anchor='s', justify='center').grid(row=0, column=0, sticky='ns')
+        Label(frame, text="FROM SCREEN WITH DIMENSION 1366x768", font=self.font['body'], anchor='n',
+              fg=self.color_fg[self.theme]['section'], bg=self.color_bg[self.theme]['BG']).grid(row=1, column=0, sticky='ns')
+
+        return frame
 
     # Created two side panels on left and right
     def create_two_columns(self):
