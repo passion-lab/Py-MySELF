@@ -1,5 +1,5 @@
 from tkinter import (
-    Tk,
+    Tk, Toplevel,
     StringVar,
     Frame, Label, Canvas, PhotoImage, Message, Button
 )
@@ -366,7 +366,15 @@ class Self_Bio_GUI(Self_Ask_GUI):
     def create_actions(self):
         frame = self.create_section(self.left_panel, (5, 0))
         frame.configure(bg=self.color_bg[self.theme]['BG'])
-        options = [" EXIT", " MINIMIZE", " ABOUT MYSELF", " RESUME PDF", " STAR"]
+        options = {
+            # "Button Name": function name, function parameter (None for nothing)
+            " EXIT": self.close_window,
+            " MINIMIZE": "",
+            " MYSELF": self.create_about_myself_window,
+            " RESUME PDF": open_new_tab,
+            " SOURCE CODE": open_new_tab,
+            " STAR": ""
+        }
         for i, option in enumerate(options):
             frame.columnconfigure(i, weight=1)
             button = Label(frame, text=f"[ {option} ]", bg=self.color_bg[self.theme]['BG'], cursor='hand2',
@@ -375,6 +383,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
             button.bind('<Enter>', lambda e=None, b=button, index=i: b.configure(
                 fg="red" if index == 0 else self.color_fg[self.theme]['highlight']))
             button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
+            button.bind('<Button-1>', lambda e=None, func=options[option]: func())
 
         return frame
 
@@ -495,3 +504,24 @@ class Self_Bio_GUI(Self_Ask_GUI):
                   bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['body']).grid(row=1, column=i,
                                                                                                      sticky="nsew")
         return bg_frame
+
+    def create_about_myself_window(self):
+        about_window = Toplevel(self.window)
+        about_window.attributes('-topmost', True)
+        about_window.attributes('-alpha', 0.9)
+        about_window.overrideredirect(True)
+        about_window.resizable(False, False)
+
+        bg_frame = Frame(about_window, bg=self.color_bg[self.theme]['BG'])
+        bg_frame.pack(fill='both', expand=True)
+        Label(bg_frame, text="Passion-Lab's\nMySELF", font=self.font['section'], justify='left', anchor='w',
+              bg=self.color_bg[self.theme]['BG'], fg=self.color_fg[self.theme]['heading']
+              ).pack(side='top', fill='x', anchor='w', padx=30, pady=(20, 0))
+        Label(bg_frame, text="Not wards, when actions tell everything", font=self.font['body'], justify='left',
+              anchor='w', fg=self.color_fg[self.theme]['body'], bg=self.color_bg[self.theme]['BG']
+              ).pack(side='top', fill='x', anchor='w', padx=30, pady=(0, 20))
+
+        about_window.geometry(f"+{self.window.winfo_x() + 10}+{self.window.winfo_height() - 200}")
+        about_window.bind('<Escape>', lambda e=None: about_window.destroy())
+        print(about_window.winfo_height(), about_window.winfo_screenheight(), about_window.winfo_rooty())
+        about_window.mainloop()
