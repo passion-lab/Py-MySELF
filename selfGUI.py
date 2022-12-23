@@ -359,9 +359,24 @@ class Self_Bio_GUI(Self_Ask_GUI):
               ).pack(padx=10, pady=(10, 0), anchor="w")
         Label(title_frame, text=" | ".join(add_skills), font=self.font['body'], bg=self.color_bg[self.theme]['others'],
               fg=self.color_fg[self.theme]['body'], anchor="w", wraplength=500, justify='left').pack(
-            padx=10, pady=(0, 10), anchor="w")
+              padx=10, pady=(0, 10), anchor="w")
 
         return title_frame
+
+    def create_actions(self):
+        frame = self.create_section(self.left_panel, (5, 0))
+        frame.configure(bg=self.color_bg[self.theme]['BG'])
+        options = [" EXIT", " RESUME PDF", " STAR"]
+        for i, option in enumerate(options):
+            frame.columnconfigure(i, weight=1)
+            button = Label(frame, text=f"[ {option} ]", bg=self.color_bg[self.theme]['BG'], cursor='hand2',
+                           fg=self.color_fg[self.theme]['heading'])
+            button.grid(row=0, column=i)
+            button.bind('<Enter>', lambda e=None, b=button, index=i: b.configure(
+                fg="red" if index == 0 else self.color_fg[self.theme]['highlight']))
+            button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
+
+        return frame
 
     def create_right_section(self, section_name):
         bg_frame = Frame(self.right_panel, bg=self.color_bg[self.theme]['BG'], height=1000)
