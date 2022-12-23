@@ -32,7 +32,6 @@ def language_fluency(rate: int | float):
 if __name__ == '__main__':
     ASK.start()
     salutation, theme = ASK.get_answers()
-    # salutation = "Sir"
 
     APP = Self_Bio_GUI(theme)
     APP.create_new_window(no_title_bar=True)
