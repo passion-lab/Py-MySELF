@@ -12,9 +12,9 @@ ASK = Self_Ask_GUI()
 
 # Speak function
 def speak(text: str):
-    TTS.say(text)
-    TTS.runAndWait()
-    # pass
+    # TTS.say(text)
+    # TTS.runAndWait()
+    pass
 
 
 def language_fluency(rate: int | float):
@@ -37,7 +37,9 @@ if __name__ == '__main__':
     APP = Self_Bio_GUI(theme)
     APP.create_new_window(no_title_bar=True)
     APP.main_window()
-    APP.create_two_columns()
+    temp = APP.initial_banner()
+    # temp.after(5000, lambda: temp.pack_forget())
+    # APP.create_two_columns()
     # For testing purposes only
     # APP.left_panel.configure(highlightthickness=1, highlightbackground="blue", highlightcolor="blue")
     # APP.right_panel.configure(highlightthickness=1, highlightbackground="green", highlightcolor="green")
@@ -128,8 +130,12 @@ if __name__ == '__main__':
         _ = APP.create_title(title=_title, name=_name, designation=_designation)
         _.after(1000, lambda: project_experience(_title=_title, _name=_name, _designation=_designation))
 
-    speak(f"Good morning {salutation}, I'm feeling too excited to present myself to you.")
-    APP.window.after(1000, title)
+    def launch():
+        temp.pack_forget()
+        APP.create_two_columns()
+        speak(f"Good morning {salutation}, I'm feeling too excited to present myself to you.")
+        APP.window.after(1000, title)
 
+    temp.after(5000, launch)
     # -------
     APP.display_window()
