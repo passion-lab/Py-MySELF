@@ -387,7 +387,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
             " MYSELF": self.create_about_myself_window,
             " RESUME PDF": webpage_resume_pdf,
             " SOURCE CODE": webpage_source_code,
-            " STAR": webpage_repo_star
+            " REPO": webpage_repo_star
         }
         for i, option in enumerate(options):
             frame.columnconfigure(i, weight=1)
@@ -537,5 +537,4 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
         about_window.geometry(f"+{self.window.winfo_x() + 10}+{self.window.winfo_height() - 200}")
         about_window.bind('<Escape>', lambda e=None: about_window.destroy())
-        print(about_window.winfo_height(), about_window.winfo_screenheight(), about_window.winfo_rooty())
         about_window.mainloop()
