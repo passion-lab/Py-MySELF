@@ -74,6 +74,7 @@ if __name__ == '__main__':
     def conclusion(*add_skill):
         speak(f"Besides Python what's my key skill, I also have some additional skills. Some of worth mentioning"
               f"additional skills I know are: {add_skill[0]}")
+        _actions = RESUME.get_options("ACTIONS")
         APP.create_actions()
 
     def additional_skills(**cont):
