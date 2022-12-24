@@ -208,7 +208,14 @@ class Self_Ask_GUI(Self_GUI_Styles):
             self.start()
 
     def display_window(self):
+        # Restore window from taskbar as it configured before, after minimizing
+        self.window.bind('<Map>', lambda e=None: self.window.overrideredirect(True))
         self.window.mainloop()
+
+    def minimize_window(self):
+        self.window.state('withdrawn')
+        self.window.overrideredirect(False)
+        self.window.state('iconic')
 
     def close_window(self):
         self.window.destroy()
@@ -369,7 +376,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
         options = {
             # "Button Name": function name, function parameter (None for nothing)
             " EXIT": self.close_window,
-            " MINIMIZE": "",
+            " MINIMIZE": self.minimize_window,
             " MYSELF": self.create_about_myself_window,
             " RESUME PDF": open_new_tab,
             " SOURCE CODE": open_new_tab,
