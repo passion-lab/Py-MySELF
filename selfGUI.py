@@ -372,14 +372,14 @@ class Self_Bio_GUI(Self_Ask_GUI):
         return title_frame
 
     # Action buttons in the left panel
-    def create_actions(self):
+    def create_actions(self, actions):
         frame = self.create_section(self.left_panel, (5, 0))
         frame.configure(bg=self.color_bg[self.theme]['BG'])
 
         # Action buttons and their functions
-        webpage_resume_pdf = partial(open_new_tab, "https://www.github.com/")
-        webpage_source_code = partial(open_new_tab, "https://www.google.com/")
-        webpage_repo = partial(open_new_tab, "https://www.github.com/")
+        webpage_resume_pdf = partial(open_new_tab, actions[0])
+        webpage_source_code = partial(open_new_tab, actions[1])
+        webpage_repo = partial(open_new_tab, actions[2])
         options = {
             # "Button Name": function_name
             " EXIT": self.close_window,
