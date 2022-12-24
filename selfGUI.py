@@ -371,6 +371,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
 
         return title_frame
 
+    # Action buttons in the left panel
     def create_actions(self):
         frame = self.create_section(self.left_panel, (5, 0))
         frame.configure(bg=self.color_bg[self.theme]['BG'])
