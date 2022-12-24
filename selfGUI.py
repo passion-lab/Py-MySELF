@@ -4,6 +4,7 @@ from tkinter import (
     Frame, Label, Canvas, PhotoImage, Message, Button
 )
 from webbrowser import open_new_tab
+from functools import partial
 
 
 class Self_GUI_Styles:
@@ -373,14 +374,19 @@ class Self_Bio_GUI(Self_Ask_GUI):
     def create_actions(self):
         frame = self.create_section(self.left_panel, (5, 0))
         frame.configure(bg=self.color_bg[self.theme]['BG'])
+
+        # Action buttons and their functions
+        webpage_resume_pdf = partial(open_new_tab, "https://www.github.com/")
+        webpage_source_code = partial(open_new_tab, "https://www.google.com/")
+        webpage_repo_star = partial(open_new_tab, "https://www.github.com/")
         options = {
-            # "Button Name": function name, function parameter (None for nothing)
+            # "Button Name": function_name
             " EXIT": self.close_window,
             " MINIMIZE": self.minimize_window,
             " MYSELF": self.create_about_myself_window,
-            " RESUME PDF": open_new_tab,
-            " SOURCE CODE": open_new_tab,
-            " STAR": ""
+            " RESUME PDF": webpage_resume_pdf,
+            " SOURCE CODE": webpage_source_code,
+            " STAR": webpage_repo_star
         }
         for i, option in enumerate(options):
             frame.columnconfigure(i, weight=1)
