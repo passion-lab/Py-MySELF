@@ -526,15 +526,54 @@ class Self_Bio_GUI(Self_Ask_GUI):
         about_window.overrideredirect(True)
         about_window.resizable(False, False)
 
-        bg_frame = Frame(about_window, bg=self.color_bg[self.theme]['BG'])
+        bg_frame = Frame(about_window, bg=self.color_bg[self.theme]['BG'], highlightthickness=1,
+                         highlightcolor=self.color_fg[self.theme]['heading'],
+                         highlightbackground=self.color_fg[self.theme]['heading'])
         bg_frame.pack(fill='both', expand=True)
-        Label(bg_frame, text="Passion-Lab's\nMySELF", font=self.font['section'], justify='left', anchor='w',
+
+        # Header
+        Label(bg_frame, text="Passion-Lab's", font=self.font['title'], justify='left', anchor='w',
               bg=self.color_bg[self.theme]['BG'], fg=self.color_fg[self.theme]['heading']
               ).pack(side='top', fill='x', anchor='w', padx=30, pady=(20, 0))
-        Label(bg_frame, text="Not wards, when actions tell everything", font=self.font['body'], justify='left',
-              anchor='w', fg=self.color_fg[self.theme]['body'], bg=self.color_bg[self.theme]['BG']
+        Label(bg_frame, text="MySELF", font=self.font['section'], justify='left', anchor='w',
+              bg=self.color_bg[self.theme]['BG'], fg=self.color_fg[self.theme]['heading']
+              ).pack(side='top', fill='x', anchor='w', padx=30, pady=0)
+        Label(bg_frame, text='" Not words, when actions tell everything! "', font=self.font['heading'], justify='left',
+              anchor='w', fg=self.color_fg[self.theme]['highlight'], bg=self.color_bg[self.theme]['BG']
               ).pack(side='top', fill='x', anchor='w', padx=30, pady=(0, 20))
 
-        about_window.geometry(f"+{self.window.winfo_x() + 10}+{self.window.winfo_height() - 200}")
+        # Body
+        body_frame = Frame(bg_frame, bg=self.color_bg[self.theme]['BG'])
+        body_frame.pack(fill='both', padx=30, pady=(0, 20))
+        body_frame.columnconfigure(0, weight=1)
+        body_frame.columnconfigure(1, weight=1)
+        Label(body_frame, text="VERSION", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=0, column=0, sticky='ew')
+        Label(body_frame, text="1.0.0", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=0, column=1, sticky='ew')
+        Label(body_frame, text="IDENTITY", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=1, column=0, sticky='ew')
+        Label(body_frame, text="Passion-Lab", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=1, column=1, sticky='ew')
+        Label(body_frame, text="AUTHOR", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=2, column=0, sticky='ew')
+        Label(body_frame, text="Subhankar Samanta", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=2, column=1, sticky='ew')
+        Label(body_frame, text="GITHUB", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=3, column=0, sticky='ew')
+        Label(body_frame, text="@Passion-Lab", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=3, column=1, sticky='ew')
+        Label(body_frame, text="EMAIL", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=4, column=0, sticky='ew')
+        Label(body_frame, text="connect.subhankar@protonmail.com", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=4, column=1, sticky='ew')
+        Label(body_frame, text="MOBILE", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=5, column=0, sticky='ew')
+        Label(body_frame, text="+919733554698", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=5, column=1, sticky='ew')
+
+        about_window.geometry(f"+{self.window.winfo_x() + 10}+{self.window.winfo_height() - 398}")
         about_window.bind('<Escape>', lambda e=None: about_window.destroy())
+        about_window.bind('<Button-1>', lambda e=None: about_window.destroy())
+        self.window.bind('<Button-1>', lambda e=None: about_window.destroy())
         about_window.mainloop()
