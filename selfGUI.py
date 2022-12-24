@@ -547,30 +547,23 @@ class Self_Bio_GUI(Self_Ask_GUI):
         body_frame.pack(fill='both', padx=30, pady=(0, 20))
         body_frame.columnconfigure(0, weight=1)
         body_frame.columnconfigure(1, weight=1)
-        Label(body_frame, text="VERSION", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
-              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=0, column=0, sticky='ew')
-        Label(body_frame, text="1.0.0", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
-              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=0, column=1, sticky='ew')
-        Label(body_frame, text="IDENTITY", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
-              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=1, column=0, sticky='ew')
-        Label(body_frame, text="Passion-Lab", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
-              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=1, column=1, sticky='ew')
-        Label(body_frame, text="AUTHOR", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
-              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=2, column=0, sticky='ew')
-        Label(body_frame, text="Subhankar Samanta", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
-              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=2, column=1, sticky='ew')
-        Label(body_frame, text="GITHUB", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
-              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=3, column=0, sticky='ew')
-        Label(body_frame, text="@Passion-Lab", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
-              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=3, column=1, sticky='ew')
-        Label(body_frame, text="EMAIL", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
-              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=4, column=0, sticky='ew')
-        Label(body_frame, text="connect.subhankar@protonmail.com", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
-              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=4, column=1, sticky='ew')
-        Label(body_frame, text="MOBILE", font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
-              bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=5, column=0, sticky='ew')
-        Label(body_frame, text="+919733554698", font=self.font['body'], fg=self.color_fg[self.theme]['body'],
-              bg=self.color_bg[self.theme]['BG'], anchor='w').grid(row=5, column=1, sticky='ew')
+        values = [
+            ("VERSION", "1.0.0", {"web": partial(open_new_tab, "https://github.com/passion-lab/Py-MySELF/releases")}),
+            ("IDENTITY", "Passion-Lab", {"web": partial(open_new_tab, "https://passion-lab.github.io")}),
+            ("AUTHOR", "Subhankar Samanta", {"web": partial(open_new_tab, "https://")}),
+            ("GITHUB", "@Passion-Lab", {"web": partial(open_new_tab, "https://github.com/passion-lab/")}),
+            ("EMAIL", "connect.subhankar@protonmail.com", {"web": partial(open_new_tab, "mailto:connect.subhankar@protonmail.com")}),
+            ("MOBILE", "+91 9733554698", {"web": partial(open_new_tab, "tel:+919733554698")})
+        ]
+        for i, value in enumerate(values):
+            Label(body_frame, text=value[0], font=self.font['heading'], fg=self.color_fg[self.theme]['heading'],
+                  bg=self.color_bg[self.theme]['BG'], anchor='e').grid(row=i, column=0, sticky='ew')
+            button = Label(body_frame, text=value[1], font=self.font['body'], fg=self.color_fg[self.theme]['body'],
+                           bg=self.color_bg[self.theme]['BG'], cursor='hand2', anchor='w')
+            button.grid(row=i, column=1, sticky='ew')
+            button.bind('<Enter>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
+            button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['body']))
+            button.bind('<Button-1>', lambda e=None, link=value[2]['web']: link())
 
         about_window.geometry(f"+{self.window.winfo_x() + 10}+{self.window.winfo_height() - 398}")
         about_window.bind('<Escape>', lambda e=None: about_window.destroy())
