@@ -548,11 +548,12 @@ class Self_Bio_GUI(Self_Ask_GUI):
         body_frame.columnconfigure(0, weight=1)
         body_frame.columnconfigure(1, weight=1)
         values = [
+            # ("NAME", "Value", {"webpage redirection": function}
             ("VERSION", "1.0.0", {"web": partial(open_new_tab, "https://github.com/passion-lab/Py-MySELF/releases")}),
             ("IDENTITY", "Passion-Lab", {"web": partial(open_new_tab, "https://passion-lab.github.io")}),
-            ("AUTHOR", "Subhankar Samanta", {"web": partial(open_new_tab, "https://")}),
+            ("AUTHOR", "Subhankar Samanta", {"web": partial(open_new_tab, "https://https://github.com/passion-lab/Py-MySELF/releases/download/v1.0.0-alpha.0/RESUME.Passion-Lab.Python__v1.pdf")}),
             ("GITHUB", "@Passion-Lab", {"web": partial(open_new_tab, "https://github.com/passion-lab/")}),
-            ("EMAIL", "connect.subhankar@protonmail.com", {"web": partial(open_new_tab, "mailto:connect.subhankar@protonmail.com")}),
+            ("EMAIL", "connect.subhankar@protonmail.com", {"web": partial(open_new_tab,"mailto:connect.subhankar@protonmail.com")}),
             ("MOBILE", "+91 9733554698", {"web": partial(open_new_tab, "tel:+919733554698")})
         ]
         for i, value in enumerate(values):
