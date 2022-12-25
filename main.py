@@ -78,10 +78,11 @@ if __name__ == '__main__':
               "by raising a new issue in my repository. {}.".format(_line))
 
     def actions(*add_skill):
-        speak(f"Besides Python what's my key skill, I also have some additional skills. Some of worth mentioning"
+        speak(f"Besides my key skill, I also have some additional skills. Some of worth mentioning"
               f"additional skills I know are: {add_skill[0]}")
         _actions = RESUME.get_options("ACTIONS")
-        APP.create_actions(_actions)
+        _ = APP.create_actions(_actions)
+        _.after(10, conclusion)
 
     def additional_skills(**cont):
         speak(f"If your kind consider allow you, kindly don't hesitate to contact me by calling me at "
@@ -136,7 +137,7 @@ if __name__ == '__main__':
         temp.pack_forget()
         APP.create_two_columns()
         speak(f"Good morning {salutation}, I'm feeling too excited to present myself to you.")
-        APP.window.after(1000, title)
+        APP.window.after(10, title)
 
     temp.after(5000, launch)
     # -------
