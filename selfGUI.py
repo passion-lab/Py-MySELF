@@ -240,7 +240,8 @@ class Self_Bio_GUI(Self_Ask_GUI):
         self.left_panel: Frame | None = None
         self.right_panel: Frame | None = None
 
-    def main_window(self, ico_file=None):
+    def main_window(self, title, ico_file=None):
+        self.window.title(title if title else "MySELF")
         self.window.geometry(f"{self.screen_w}x{self.screen_h}")
         self.window.resizable(False, False)
         self.window.configure(background=self.color_bg[self.theme]['BG'])
