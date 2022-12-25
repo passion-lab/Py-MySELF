@@ -1,7 +1,6 @@
 from selfGUI import Self_Ask_GUI, Self_Bio_GUI
 from pyttsx3 import init as tts_init
 from selfINFO import SelfINFO
-from time import sleep
 
 
 TTS = tts_init()
