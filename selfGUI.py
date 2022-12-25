@@ -240,10 +240,12 @@ class Self_Bio_GUI(Self_Ask_GUI):
         self.left_panel: Frame | None = None
         self.right_panel: Frame | None = None
 
-    def main_window(self):
+    def main_window(self, ico_file=None):
         self.window.geometry(f"{self.screen_w}x{self.screen_h}")
         self.window.resizable(False, False)
         self.window.configure(background=self.color_bg[self.theme]['BG'])
+        if ico_file:
+            self.window.iconbitmap(ico_file)
 
     def initial_banner(self):
         frame = Frame(self.window, bg=self.color_bg[self.theme]['BG'])
@@ -254,7 +256,8 @@ class Self_Bio_GUI(Self_Ask_GUI):
         Label(frame, text="Created and Best View", font=self.font['section'], fg=self.color_fg[self.theme]['section'],
               bg=self.color_bg[self.theme]['BG'], anchor='s', justify='center').grid(row=0, column=0, sticky='ns')
         Label(frame, text="FROM SCREEN WITH DIMENSION 1366x768", font=self.font['body'], anchor='n',
-              fg=self.color_fg[self.theme]['section'], bg=self.color_bg[self.theme]['BG']).grid(row=1, column=0, sticky='ns')
+              fg=self.color_fg[self.theme]['section'], bg=self.color_bg[self.theme]['BG']).grid(row=1, column=0,
+                                                                                                sticky='ns')
 
         return frame
 
@@ -354,7 +357,8 @@ class Self_Bio_GUI(Self_Ask_GUI):
             (email, "Compose an email...", {"web": partial(open_new_tab, f"mailto:{email}")}),
             (website, "Visit website...", {"web": partial(open_new_tab, f"https://{website}")}),
             (github, "Go for the GitHub repository...", {"web": partial(open_new_tab, f"https://{github}")}),
-            (address, "Locate on the map...", {"web": partial(open_new_tab, f"https://www.google.com/maps/place/{address.replace(' ', '+')}")}),
+            (address, "Locate on the map...",
+             {"web": partial(open_new_tab, f"https://www.google.com/maps/place/{address.replace(' ', '+')}")}),
         ]
         body_frame = Frame(title_frame, bg=self.color_bg[self.theme]['others'])
         body_frame.pack(padx=10, pady=(0, 10), anchor="w")
@@ -377,7 +381,7 @@ class Self_Bio_GUI(Self_Ask_GUI):
               ).pack(padx=10, pady=(10, 0), anchor="w")
         Label(title_frame, text=" | ".join(add_skills), font=self.font['body'], bg=self.color_bg[self.theme]['others'],
               fg=self.color_fg[self.theme]['body'], anchor="w", wraplength=558, justify='left').pack(
-              padx=10, pady=(0, 10), anchor="w")
+            padx=10, pady=(0, 10), anchor="w")
 
         return title_frame
 
@@ -392,12 +396,12 @@ class Self_Bio_GUI(Self_Ask_GUI):
         webpage_repo = partial(open_new_tab, actions[2])
         options = {
             # "Button Name": function_name
-            " EXIT": self.close_window,
-            " MINIMIZE": self.minimize_window,
-            " MYSELF": self.create_about_myself_window,
-            " RESUME PDF": webpage_resume_pdf,
+            " EXIT"       : self.close_window,
+            " MINIMIZE"   : self.minimize_window,
+            " MYSELF"     : self.create_about_myself_window,
+            " RESUME PDF" : webpage_resume_pdf,
             " SOURCE CODE": webpage_source_code,
-            " REPO": webpage_repo
+            " REPO"       : webpage_repo
         }
         for i, option in enumerate(options):
             frame.columnconfigure(i, weight=1)
@@ -561,9 +565,11 @@ class Self_Bio_GUI(Self_Ask_GUI):
             # ("NAME", "Value", {"webpage redirection": function}
             ("VERSION", "1.0.0", {"web": partial(open_new_tab, "https://github.com/passion-lab/Py-MySELF/releases")}),
             ("IDENTITY", "Passion-Lab", {"web": partial(open_new_tab, "https://passion-lab.github.io")}),
-            ("AUTHOR", "Subhankar Samanta", {"web": partial(open_new_tab, "https://https://github.com/passion-lab/Py-MySELF/releases/download/v1.0.0-alpha.0/RESUME.Passion-Lab.Python__v1.pdf")}),
+            ("AUTHOR", "Subhankar Samanta", {"web": partial(open_new_tab,
+                                                            "https://https://github.com/passion-lab/Py-MySELF/releases/download/v1.0.0-alpha.0/RESUME.Passion-Lab.Python__v1.pdf")}),
             ("GITHUB", "@Passion-Lab", {"web": partial(open_new_tab, "https://github.com/passion-lab/")}),
-            ("EMAIL", "connect.subhankar@protonmail.com", {"web": partial(open_new_tab,"mailto:connect.subhankar@protonmail.com")}),
+            ("EMAIL", "connect.subhankar@protonmail.com",
+             {"web": partial(open_new_tab, "mailto:connect.subhankar@protonmail.com")}),
             ("MOBILE", "+91 9733554698", {"web": partial(open_new_tab, "tel:+919733554698")})
         ]
         for i, value in enumerate(values):
