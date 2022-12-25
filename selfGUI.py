@@ -347,16 +347,26 @@ class Self_Bio_GUI(Self_Ask_GUI):
         Label(title_frame, text="MODE OF CONTACT", font=self.font['heading'],
               bg=self.color_bg[self.theme]['others'], fg=self.color_fg[self.theme]['heading'], anchor="w",
               ).pack(padx=10, pady=(10, 0), anchor="w")
-        Label(title_frame, text=mobile, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
-        Label(title_frame, text=email, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
-        Label(title_frame, text=website, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
-        Label(title_frame, text=github, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 0), anchor="w")
-        Label(title_frame, text=address, font=self.font['body'], bg=self.color_bg[self.theme]['others'],
-              fg=self.color_fg[self.theme]['body'], anchor="w").pack(padx=10, pady=(0, 10), anchor="w")
+
+        values = [
+            # (parameter, "Hover text...", {"webpage redirection": function},
+            (mobile, "Make a call...", {"web": partial(open_new_tab, f"tel:{mobile}")}),
+            (email, "Compose an email...", {"web": partial(open_new_tab, f"mailto:{email}")}),
+            (website, "Visit website...", {"web": partial(open_new_tab, f"https://{website}")}),
+            (github, "Go for the GitHub repository...", {"web": partial(open_new_tab, f"https://{github}")}),
+            (address, "Locate on the map...", {"web": partial(open_new_tab, f"https://www.google.com/maps/place/{address.replace(' ', '+')}")}),
+        ]
+        body_frame = Frame(title_frame, bg=self.color_bg[self.theme]['others'])
+        body_frame.pack(padx=10, pady=(0, 10), anchor="w")
+        for value in values:
+            button = Label(body_frame, text=value[0], font=self.font['body'], bg=self.color_bg[self.theme]['others'],
+                           fg=self.color_fg[self.theme]['body'], anchor="w", cursor='hand2')
+            button.pack(anchor="w")
+            button.bind('<Enter>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['heading']))
+            button.bind('<Enter>', lambda e=None, b=button, t=value[1]: b.configure(text=f"{t}   "), add='+')
+            button.bind('<Leave>', lambda e=None, b=button: b.configure(fg=self.color_fg[self.theme]['body']))
+            button.bind('<Leave>', lambda e=None, b=button, t=value[0]: b.configure(text=t), add='+')
+            button.bind('<Button-1>', lambda e=None, link=value[2]['web']: link())
 
         return title_frame
 
