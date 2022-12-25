@@ -53,8 +53,7 @@ if __name__ == '__main__':
         speak(f"I've done a number of projects, which are also in active development and have future  plans of "
               f"improvements too. Some of the featured projects are listed here. The first one is {prj['_p1'][:2]}."
               f"Then, {prj['_p2'][:2]}. {prj['_p3'][0]} is the third one, which is {prj['_p3'][1]}. Next, "
-              f"{prj['_p4'][:2]}. Last but not the least, the fifth featured project is {prj['_p5'][:2]}. Click on "
-              f"the hyperlink after each project's title to visit the GitHub repository for the respective project.")
+              f"{prj['_p4'][:2]}. Last but not the least, the fifth featured project is {prj['_p5'][:2]}.")
 
         _mp, _hs, _bachelor, _master = RESUME.get_options("MP_EDUCATION"), RESUME.get_options("HS_EDUCATION"), \
                                        RESUME.get_options("BACHELOR_EDUCATION"), RESUME.get_options("MASTER_EDUCATION")
@@ -71,7 +70,14 @@ if __name__ == '__main__':
         _ = APP.create_project_experience(_project_1, _project_2, _project_3, _project_4, _project_5)
         _.after(1000, lambda: education(_p1=_project_1, _p2=_project_2, _p3=_project_3, _p4=_project_4, _p5=_project_5))
 
-    def conclusion(*add_skill):
+    def conclusion():
+        _line = RESUME.get_options("BOTTOM_LINE")
+        speak("I shouldn't just say a thanks to you from the bottom of my heart, but it means a lot to me too! "
+              "I'm begging apology for any mistakes made by me anywhere. Kindly consider hitting that resume pdf "
+              "button to download the pdf version of my resume and giving feedback by going through mode of contact or "
+              "by raising a new issue in my repository. {}.".format(_line))
+
+    def actions(*add_skill):
         speak(f"Besides Python what's my key skill, I also have some additional skills. Some of worth mentioning"
               f"additional skills I know are: {add_skill[0]}")
         _actions = RESUME.get_options("ACTIONS")
@@ -84,7 +90,7 @@ if __name__ == '__main__':
 
         _additional_skills = RESUME.get_options("ADDITIONAL_SKILLS")
         _ = APP.create_additional_skills(_additional_skills)
-        _.after(1000, lambda: conclusion(_additional_skills))
+        _.after(1000, lambda: actions(_additional_skills))
 
     def contact(**add):
         speak(f"Just for a bit of my additional information, I've keen interests in {add['_interest']}."
