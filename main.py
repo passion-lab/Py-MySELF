@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     APP = Self_Bio_GUI(theme)
     APP.create_new_window(no_title_bar=True)
-    APP.main_window(ico_file="./Logo_light.ico")
+    APP.main_window(title="MySELF - Passion-Lab", ico_file="./Logo_light.ico")
     temp = APP.initial_banner()
 
     def skill(**edu):
