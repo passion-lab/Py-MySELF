@@ -13,9 +13,9 @@ ASK = Self_Ask_GUI()
 
 # Speak function
 def speak(text: str):
-    # TTS.say(text)
-    # TTS.runAndWait()
-    pass
+    TTS.say(text)
+    TTS.runAndWait()
+    # pass
 
 
 def language_fluency(rate: int | float):
