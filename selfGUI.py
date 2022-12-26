@@ -211,6 +211,7 @@ class Self_Ask_GUI(Self_GUI_Styles):
     def display_window(self):
         # Restore window from taskbar as it configured before, after minimizing
         self.window.bind('<Map>', lambda e=None: self.window.overrideredirect(True))
+        self.window.attributes('-topmost', True)
         self.window.mainloop()
 
     def minimize_window(self):
@@ -240,13 +241,11 @@ class Self_Bio_GUI(Self_Ask_GUI):
         self.left_panel: Frame | None = None
         self.right_panel: Frame | None = None
 
-    def main_window(self, title, ico_file=None):
+    def main_window(self, title):
         self.window.title(title if title else "MySELF")
         self.window.geometry(f"{self.screen_w}x{self.screen_h}")
         self.window.resizable(False, False)
         self.window.configure(background=self.color_bg[self.theme]['BG'])
-        if ico_file:
-            self.window.iconbitmap(ico_file)
 
     def initial_banner(self):
         frame = Frame(self.window, bg=self.color_bg[self.theme]['BG'])
