@@ -1,19 +1,21 @@
 from selfGUI import Self_Ask_GUI, Self_Bio_GUI
 from pyttsx3 import init as tts_init
 from selfINFO import SelfINFO
+from pyautogui import hotkey
 
 
 TTS = tts_init()
 TTS.setProperty('rate', 200)
 RESUME = SelfINFO("./RESUME.ini")
+hotkey('winleft', 'd')  # Minimizes all opened windows
 ASK = Self_Ask_GUI()
 
 
 # Speak function
 def speak(text: str):
-    TTS.say(text)
-    TTS.runAndWait()
-    # pass
+    # TTS.say(text)
+    # TTS.runAndWait()
+    pass
 
 
 def language_fluency(rate: int | float):
@@ -34,7 +36,7 @@ if __name__ == '__main__':
 
     APP = Self_Bio_GUI(theme)
     APP.create_new_window(no_title_bar=True)
-    APP.main_window(title="MySELF - Passion-Lab", ico_file="icon_light.ico")
+    APP.main_window(title="MySELF - Passion-Lab", icon="./icon_light.ico")
     temp = APP.initial_banner()
 
     def skill(**edu):
