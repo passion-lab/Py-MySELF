@@ -141,5 +141,6 @@ if __name__ == '__main__':
         APP.window.after(10, title)
 
     temp.after(5000, launch)
-    # -------
+
+    # Runs the app -------
     APP.display_window()
